@@ -13,7 +13,23 @@ jobs:
       name: production
     permissions:
       contents: write
+      pull-requests: write
     steps:
       - uses: lowlighter/metrics@latest
         with:
+          base: header
+          plugin_isocalendar: yes
+          plugin_languages: yes
+          plugin_stars: yes
+          config_order: base.header, isocalendar, languages, stars
           token: ${{ secrets.METRICS_TOKEN }}
+      
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: my-metrics-0.svg
+          output_action: pull-request
+  
+      - uses: lowlighter/metrics@latest
+        with:
+          filename: my-metrics-1.svg
+          output_action: pull-request-merge    
